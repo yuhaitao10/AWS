@@ -1,0 +1,36 @@
+Parameters:
+  AZone:
+    Type: String
+    Default: us-east-1d
+Resources:
+  EC2A:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-c481fad3 # N.Virginia - Ama Sept'16
+      InstanceType: t2.micro
+  MyVolume2: 
+    Type: AWS::EC2::Volume
+    Properties:
+      Size: 5
+      VolumeType: gp2
+      AvailabilityZone: !Ref AZone 
+  EC2B:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-c481fad3 # N.Virginia - Ama Sept'16
+      InstanceType: t2.micro
+      AvailabilityZone: !Ref AZone
+      Volumes: 
+        -
+          VolumeId: !Ref MyVolume2     
+          Device: /dev/sdk
+  S3:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: wp-asjfhjf # replace xxxxxx with random
+  MyVolume: 
+    Type: AWS::EC2::Volume
+    Properties:
+      Size: 5
+      VolumeType: gp2
+      AvailabilityZone: !Ref AZone
