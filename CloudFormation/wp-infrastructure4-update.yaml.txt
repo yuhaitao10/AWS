@@ -163,7 +163,5 @@ Resources:
                 sed -i 's/password_here/${DatabasePassword}/g' wp-config.php
             06_inject_createuser:
               command: "useradd dave"
-            07_inject_creatpassword:
-              command: "dave:12345678 | chpasswd"
   S3:
     Type: "AWS::S3::Bucket"
